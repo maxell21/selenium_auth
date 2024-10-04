@@ -9,6 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 # self imports
 from settings import chromedriver_path, url, email, password
 import time
+import json
 
 # Создаем сервис для Chrome
 service = Service(executable_path=chromedriver_path)
@@ -40,6 +41,10 @@ try:
     login_button = driver.find_element(By.ID, "")
     time.sleep(2)
     login_button.click()
+    
+    cookies = driver.get_cookies()
+    with open('cookies.json', 'w') as cookies_file:
+        json.dump(cookies, 'cookies.json')
     
     time.sleep(10)
 
